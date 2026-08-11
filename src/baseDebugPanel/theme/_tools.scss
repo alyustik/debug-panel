@@ -1,0 +1,14 @@
+﻿@mixin no_scrollbar() {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+%font {
+  font-size: var(--bdp-font-size);
+  line-height: 90%;
+  font-weight: 400;
+  font-family: var(--bdp-font);
+}

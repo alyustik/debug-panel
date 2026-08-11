@@ -1,0 +1,41 @@
+﻿button.addButton.addButton { // strength of selector
+  padding-inline: 0;
+  margin-top: -6px;
+  border: none;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--bdp-fg);
+      background: none;
+
+      .addButtonContent {
+        color: var(--bdp-fg);
+      }
+    }
+  }
+}
+
+.sectionBody {
+  padding-bottom: 19px;
+}
+
+.addButtonContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  color: var(--bdp-fg-dim);
+  transition: color 120ms;
+  margin-left: 2px;
+}
+
+.addButtonIcon {
+  width: 7.07px;
+  height: 7.07px;
+  flex-shrink: 0;
+  transform: rotate(45deg);
+  position: relative;
+  top: -1px;
+}
+

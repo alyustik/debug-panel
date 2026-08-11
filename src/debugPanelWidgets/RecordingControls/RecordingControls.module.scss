@@ -1,0 +1,32 @@
+﻿.recordingStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--bdp-fg);
+  font-family: var(--bdp-font);
+  font-size: var(--bdp-font-size);
+  line-height: 90%;
+  padding-top: 4px;
+}
+
+.recordingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bdp-red);
+  flex-shrink: 0;
+}
+
+.recordingTime {
+  font-variant-numeric: tabular-nums;
+}
+
+.recordingFormatRow {
+  gap: 10px;
+  padding-block: 9px 14px;
+}
+
+.recordingFormatTrigger {
+  padding: 11px 12px;
+}
+

@@ -1,0 +1,95 @@
+﻿@use '../../theme/tools' as *;
+
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+.wrapOpen {
+  z-index: 2;
+}
+
+.select {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: var(--bdp-input-bg);
+  border: 1px solid var(--bdp-border);
+  color: var(--bdp-fg);
+  @extend %font;
+  padding: 11px 12px;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+}
+
+.selectDisabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arrow {
+  display: block;
+  width: 9.42px;
+  transform: rotate(180deg);
+  color: var(--bdp-fg);
+  flex-shrink: 0;
+  transition: transform 120ms ease;
+  transform-origin: center;
+}
+
+.arrowOpen {
+  transform: rotate(0deg);
+}
+
+.list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bdp-bg);
+  border: 1px solid var(--bdp-border);
+  overflow: hidden;
+}
+
+.option {
+  width: 100%;
+  background: var(--bdp-bg);
+  border: none;
+  color: var(--bdp-fg-dim);
+  @extend %font;
+  padding: 6px 10px;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: background 120ms ease, color 120ms ease;
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--bdp-btn-bg-hover);
+      color: var(--bdp-fg);
+    }
+  }
+
+  &:focus-visible {
+    background: var(--bdp-btn-bg-hover);
+    color: var(--bdp-fg);
+  }
+}
+
+.optionSelected {
+  color: var(--bdp-fg);
+}
+

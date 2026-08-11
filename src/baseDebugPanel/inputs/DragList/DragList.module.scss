@@ -1,0 +1,19 @@
+﻿@use '../../theme/tools' as *;
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  padding: 9px 0;
+}
+
+.fallback {
+  color: var(--bdp-fg);
+  @extend %font;
+}
+

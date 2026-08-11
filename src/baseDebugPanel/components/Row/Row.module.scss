@@ -1,0 +1,43 @@
+﻿@use '../../theme/tools' as *;
+
+.inline {
+  display: grid;
+  grid-template-columns: var(--bdp-label-width, 90px) 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+  min-height: 26px;
+}
+
+.stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.fullWidth {
+  display: block;
+  padding: 4px 0;
+}
+
+.label {
+  color: var(--bdp-fg);
+  @extend %font;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.labelDisabled {
+  color: var(--bdp-fg-dim);
+}
+
+.control {
+  min-width: 0;
+
+  &:only-child {
+    grid-column: 1 / -1;
+  }
+}
+

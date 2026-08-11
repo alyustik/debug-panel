@@ -1,0 +1,44 @@
+﻿@use '../../theme/tools' as *;
+
+.group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn {
+  flex: 1;
+  background: var(--bdp-btn-bg);
+  border: 1px solid var(--bdp-border);
+  color: var(--bdp-fg);
+  @extend %font;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+
+  @media (hover: hover) {
+    &:hover:not(:disabled):not(.active) {
+      background: var(--bdp-btn-bg-hover);
+      color: var(--bdp-fg);
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--bdp-fg-dim);
+    border-color: var(--bdp-fg-dim);
+  }
+}
+
+.active {
+  background: var(--bdp-fg);
+  color: var(--bdp-bg);
+  border-color: var(--bdp-fg);
+}
+
+.active:disabled {
+  background: var(--bdp-fg-dim);
+  color: var(--bdp-bg);
+  border-color: var(--bdp-fg-dim);
+}
+

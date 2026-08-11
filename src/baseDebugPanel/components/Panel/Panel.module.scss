@@ -1,0 +1,64 @@
+﻿@use '../../theme/tools' as *;
+
+.panel {
+  position: fixed;
+  top: var(--bdp-panel-top, 16px);
+  right: var(--bdp-panel-right, 16px);
+  width: var(--bdp-panel-width, 280px);
+  color: var(--bdp-fg);
+  @extend %font;
+  z-index: 10000;
+  overflow: auto;
+  height: 100%;
+  @include no_scrollbar();
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background: var(--bdp-bg);
+  z-index: 1;
+  border-bottom: 1px solid var(--bdp-section-border);
+  transition: border-color 0.3s ease;
+}
+
+.headerCollapsed {
+  border-bottom-color: transparent;
+}
+
+.headerBtn {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--bdp-fg);
+  @extend %font;
+  text-transform: uppercase;
+  padding: 13px var(--bdp-pad-x);
+  cursor: pointer;
+  text-align: left;
+}
+
+.title {
+  color: var(--bdp-fg);
+}
+
+.chevron {
+  display: inline-block;
+  font-size: 10px;
+  transition: transform .3s;
+  position: relative;
+  width: 9.42px;
+  top: 1px;
+}
+
+.collapsed {
+  transform: rotate(-180deg);
+}
+
+.body {
+  background: var(--bdp-bg);
+}
+

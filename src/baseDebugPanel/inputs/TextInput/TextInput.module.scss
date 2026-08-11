@@ -1,0 +1,27 @@
+﻿@use '../../theme/tools' as *;
+
+.input {
+  width: 100%;
+  background: var(--bdp-input-bg);
+  border: 1px solid var(--bdp-border);
+  color: var(--bdp-fg);
+  @extend %font;
+  padding: 6px 10px;
+  outline: none;
+  resize: none;
+
+  &:focus {
+    border-color: var(--bdp-fg-dim);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+}
+
+.textarea {
+  font-family: var(--bdp-font);
+  line-height: 1.4;
+}
+

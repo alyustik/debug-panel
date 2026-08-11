@@ -1,0 +1,27 @@
+﻿@use "../../theme/tools" as *;
+
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--bdp-bg);
+  color: var(--bdp-fg);
+  z-index: 100;
+  padding: 16px;
+  font-size: 12px;
+  line-height: 90%;
+  @extend %font;
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 120ms;
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration-color: transparent;
+      }
+    }
+  }
+}
+
