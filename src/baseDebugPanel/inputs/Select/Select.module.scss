@@ -74,7 +74,9 @@
   text-align: left;
   cursor: pointer;
   outline: none;
-  transition: background 120ms ease, color 120ms ease;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
 
   @media (hover: hover) {
     &:hover {
@@ -92,4 +94,3 @@
 .optionSelected {
   color: var(--bdp-fg);
 }
-

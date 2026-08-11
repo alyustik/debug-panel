@@ -1,4 +1,4 @@
-import  {
+import {
   type ButtonInput,
   type CustomInput,
   type DragListInput,
@@ -20,7 +20,11 @@ export function folder(schema: Schema, options?: FolderOptions): FolderInput {
   return { type: 'folder', schema, options };
 }
 
-export function toggleGroup<T>(value: T, options: Record<string, T> | readonly T[], opts?: Omit<ToggleGroupInput<T>, 'type' | 'value' | 'options'>): ToggleGroupInput<T> {
+export function toggleGroup<T>(
+  value: T,
+  options: Record<string, T> | readonly T[],
+  opts?: Omit<ToggleGroupInput<T>, 'type' | 'value' | 'options'>,
+): ToggleGroupInput<T> {
   return { type: 'toggleGroup', value, options, ...opts };
 }
 

@@ -8,7 +8,10 @@
   @extend %font;
   padding: 7px 12px;
   cursor: pointer;
-  transition: background 120ms ease, border-color 120ms ease, opacity 120ms ease;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    opacity 120ms ease;
 
   @media (hover: hover) {
     &:hover:not(:disabled) {
@@ -38,4 +41,3 @@
   background: transparent;
   border-color: transparent;
 }
-

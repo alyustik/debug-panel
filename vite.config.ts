@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url';
-
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -31,13 +30,10 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: (id) => externalPackages.some(
-        (packageName) => id === packageName || id.startsWith(`${packageName}/`),
-      ),
+      external: (id) => externalPackages.some((packageName) => id === packageName || id.startsWith(`${packageName}/`)),
       output: {
-        assetFileNames: (assetInfo) => (
-          assetInfo.name?.endsWith('.css') ? 'styles.css' : 'assets/[name]-[hash][extname]'
-        ),
+        assetFileNames: (assetInfo) =>
+          assetInfo.name?.endsWith('.css') ? 'styles.css' : 'assets/[name]-[hash][extname]',
         banner: "'use client';",
         chunkFileNames: 'chunks/[name]-[hash].js',
         entryFileNames: '[name].js',

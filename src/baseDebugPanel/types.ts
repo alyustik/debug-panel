@@ -1,10 +1,10 @@
-import  { type ReactNode, type Ref } from 'react';
+import { type ReactNode, type Ref } from 'react';
 
 export type DragHandleProps = {
   ref: Ref<HTMLElement>;
   listeners: Record<string, (event: unknown) => void> | undefined;
   attributes: Record<string, unknown>;
-}
+};
 
 export type InputLayout = 'inline' | 'stacked' | 'fullWidth';
 
@@ -25,7 +25,7 @@ export type BaseInputCommon = {
   rowClassName?: string;
   labelClassName?: string;
   controlClassName?: string;
-}
+};
 
 export type NumberInput = {
   type: 'number';
@@ -34,13 +34,13 @@ export type NumberInput = {
   max?: number;
   step?: number;
   onChange?: (value: number) => void;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type BooleanInput = {
   type: 'boolean';
   value: boolean;
   onChange?: (value: boolean) => void;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type StringInput = {
   type: 'string';
@@ -48,7 +48,7 @@ export type StringInput = {
   rows?: number;
   placeholder?: string;
   onChange?: (value: string) => void;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type SelectInput<T = unknown> = {
   type: 'select';
@@ -56,14 +56,14 @@ export type SelectInput<T = unknown> = {
   options: Record<string, T> | readonly T[];
   onChange?: (value: T) => void;
   triggerClassName?: string;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type ToggleGroupInput<T = unknown> = {
   type: 'toggleGroup';
   value: T;
   options: Record<string, T> | readonly T[];
   onChange?: (value: T) => void;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type ButtonInput = {
   type: 'button';
@@ -72,12 +72,12 @@ export type ButtonInput = {
   disabled?: boolean;
   content?: ReactNode;
   className?: string;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type CustomInput = {
   type: 'custom';
   content: ReactNode;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type DragListInput<T = string> = {
   type: 'dragList';
@@ -85,17 +85,10 @@ export type DragListInput<T = string> = {
   renderItem?: (item: T, index: number, dragHandle: DragHandleProps) => ReactNode;
   onChange?: (next: T[]) => void;
   getItemKey?: (item: T, index: number) => string;
-} & BaseInputCommon
+} & BaseInputCommon;
 
 export type Input =
-  | NumberInput
-  | BooleanInput
-  | StringInput
-  | SelectInput
-  | ToggleGroupInput
-  | ButtonInput
-  | CustomInput
-  | DragListInput;
+  NumberInput | BooleanInput | StringInput | SelectInput | ToggleGroupInput | ButtonInput | CustomInput | DragListInput;
 
 export type FolderOptions = {
   collapsed?: boolean;
@@ -104,13 +97,13 @@ export type FolderOptions = {
   render?: RenderFn;
   className?: string;
   bodyClassName?: string;
-}
+};
 
 export type FolderInput = {
   type: 'folder';
   schema: Schema;
   options?: FolderOptions;
-}
+};
 
 export type SchemaValue =
   | number
@@ -133,7 +126,7 @@ export type NormalizedInputNode = {
   key: string;
   parent: Path | null;
   input: Input;
-}
+};
 
 export type NormalizedFolderNode = {
   kind: 'folder';
@@ -147,33 +140,34 @@ export type NormalizedFolderNode = {
   render?: RenderFn;
   className?: string;
   bodyClassName?: string;
-}
+};
 
 export type Node = NormalizedInputNode | NormalizedFolderNode;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-export type ValuesOf<S = Record<string, any>> = S extends Record<string, infer _>
-  ? {
-      [K in keyof S]: S[K] extends number
-        ? number
-        : S[K] extends boolean
-          ? boolean
-          : S[K] extends string
-            ? string
-            : S[K] extends NumberInput
-              ? number
-              : S[K] extends BooleanInput
-                ? boolean
-                : S[K] extends StringInput
-                  ? string
-                  : S[K] extends SelectInput<infer V>
-                    ? V
-                    : S[K] extends ToggleGroupInput<infer V>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ValuesOf<S = Record<string, any>> =
+  S extends Record<string, unknown>
+    ? {
+        [K in keyof S]: S[K] extends number
+          ? number
+          : S[K] extends boolean
+            ? boolean
+            : S[K] extends string
+              ? string
+              : S[K] extends NumberInput
+                ? number
+                : S[K] extends BooleanInput
+                  ? boolean
+                  : S[K] extends StringInput
+                    ? string
+                    : S[K] extends SelectInput<infer V>
                       ? V
-                      : S[K] extends CustomInput
-                        ? unknown
-                      : S[K] extends DragListInput<infer V>
-                        ? V[]
-                        : unknown;
-    }
-  : never;
+                      : S[K] extends ToggleGroupInput<infer V>
+                        ? V
+                        : S[K] extends CustomInput
+                          ? unknown
+                          : S[K] extends DragListInput<infer V>
+                            ? V[]
+                            : unknown;
+      }
+    : never;

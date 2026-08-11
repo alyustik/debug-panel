@@ -2,19 +2,19 @@ import styles from './ToggleGroup.module.scss';
 
 import { useMemo } from 'react';
 
-import  { type ToggleGroupInput } from '../../types';
+import { type ToggleGroupInput } from '../../types';
 
 type Props = {
   input: ToggleGroupInput;
   value: unknown;
   setValue: (v: unknown) => void;
   disabled?: boolean;
-}
+};
 
 type OptionEntry = {
   label: string;
   value: unknown;
-}
+};
 
 function toEntries(options: ToggleGroupInput['options']): OptionEntry[] {
   if (Array.isArray(options)) {
@@ -37,7 +37,9 @@ export function ToggleGroup({ input, value, setValue, disabled = false }: Props)
             type="button"
             className={className}
             disabled={disabled}
-            onClick={() => { setValue(entry.value); }}
+            onClick={() => {
+              setValue(entry.value);
+            }}
           >
             {entry.label}
           </button>

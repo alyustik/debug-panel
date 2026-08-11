@@ -1,4 +1,4 @@
-﻿import {
+import {
   type FolderInput,
   type Input,
   type InputLayout,
@@ -221,4 +221,3 @@ export function parseSchema(
 
   return { nodes, valueByPath, inputKeys, inputPathByKey };
 }
-

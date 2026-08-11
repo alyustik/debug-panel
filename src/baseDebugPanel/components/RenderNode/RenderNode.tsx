@@ -8,7 +8,15 @@ import { Select } from '../../inputs/Select';
 import { Slider } from '../../inputs/Slider';
 import { TextInput } from '../../inputs/TextInput';
 import { ToggleGroup } from '../../inputs/ToggleGroup';
-import  { type Input, type InputDisabled, type Node, type NormalizedFolderNode, type NormalizedInputNode, type Path, type RenderFn } from '../../types';
+import {
+  type Input,
+  type InputDisabled,
+  type Node,
+  type NormalizedFolderNode,
+  type NormalizedInputNode,
+  type Path,
+  type RenderFn,
+} from '../../types';
 import { Folder } from '../Folder';
 import { Row } from '../Row';
 
@@ -36,7 +44,7 @@ function resolveConditional(condition: RenderFn | InputDisabled | undefined, get
 
 type InputRowProps = {
   node: NormalizedInputNode;
-}
+};
 
 function InputRow({ node }: InputRowProps) {
   const store = usePanelStore();
@@ -51,9 +59,12 @@ function InputRow({ node }: InputRowProps) {
     () => store.getState().values,
   );
 
-  const setValue = useCallback((next: unknown) => {
-    store.setValue(node.path, next);
-  }, [store, node.path]);
+  const setValue = useCallback(
+    (next: unknown) => {
+      store.setValue(node.path, next);
+    },
+    [store, node.path],
+  );
 
   const { input } = node;
   const label = input.label ?? node.key;
@@ -64,13 +75,29 @@ function InputRow({ node }: InputRowProps) {
   let control: React.ReactNode = null;
   switch (input.type) {
     case 'number':
-      control = <Slider input={input} value={value as number} setValue={setValue as (v: number) => void} disabled={disabled} />;
+      control = (
+        <Slider input={input} value={value as number} setValue={setValue as (v: number) => void} disabled={disabled} />
+      );
       break;
     case 'boolean':
-      control = <Checkbox input={input} value={Boolean(value)} setValue={setValue as (v: boolean) => void} disabled={disabled} />;
+      control = (
+        <Checkbox
+          input={input}
+          value={Boolean(value)}
+          setValue={setValue as (v: boolean) => void}
+          disabled={disabled}
+        />
+      );
       break;
     case 'string':
-      control = <TextInput input={input} value={typeof value === 'string' ? value : ''} setValue={setValue as (v: string) => void} disabled={disabled} />;
+      control = (
+        <TextInput
+          input={input}
+          value={typeof value === 'string' ? value : ''}
+          setValue={setValue as (v: string) => void}
+          disabled={disabled}
+        />
+      );
       break;
     case 'select':
       control = <Select input={input} value={value} setValue={setValue} disabled={disabled} />;
@@ -116,12 +143,12 @@ function InputRow({ node }: InputRowProps) {
 type FolderViewProps = {
   node: NormalizedFolderNode;
   level: number;
-}
+};
 
 type NodeChildrenProps = {
   parent: Path;
   level: number;
-}
+};
 
 function shouldRenderConditional(render: RenderFn | undefined, getValue: (p: Path) => unknown): boolean {
   if (!render) return true;

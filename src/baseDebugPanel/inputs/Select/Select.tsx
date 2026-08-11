@@ -3,19 +3,19 @@ import styles from './Select.module.scss';
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 
 import { ChevronIcon } from '../../components/Icons/ChevronIcon';
-import  { type SelectInput } from '../../types';
+import { type SelectInput } from '../../types';
 
 type Props = {
   input: SelectInput;
   value: unknown;
   setValue: (v: unknown) => void;
   disabled?: boolean;
-}
+};
 
 type Entry = {
   label: string;
   value: unknown;
-}
+};
 
 function toEntries(options: SelectInput['options']): Entry[] {
   if (Array.isArray(options)) {
@@ -52,21 +52,27 @@ export function Select({ input, value, setValue, disabled = false }: Props) {
     setOpen(false);
   }, []);
 
-  const handleSelect = useCallback((next: unknown) => {
-    setValue(next);
-    setOpen(false);
-    window.requestAnimationFrame(() => {
-      $trigger.current?.focus();
-    });
-  }, [setValue]);
+  const handleSelect = useCallback(
+    (next: unknown) => {
+      setValue(next);
+      setOpen(false);
+      window.requestAnimationFrame(() => {
+        $trigger.current?.focus();
+      });
+    },
+    [setValue],
+  );
 
-  const handleTriggerKeyDown = useCallback((event: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (disabled) return;
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      setOpen(true);
-    }
-  }, [disabled]);
+  const handleTriggerKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (disabled) return;
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setOpen(true);
+      }
+    },
+    [disabled],
+  );
 
   useEffect(() => {
     if (disabled) {
@@ -136,7 +142,9 @@ export function Select({ input, value, setValue, disabled = false }: Props) {
                 type="button"
                 aria-pressed={selected}
                 className={optionClassName}
-                onClick={() => { handleSelect(entry.value); }}
+                onClick={() => {
+                  handleSelect(entry.value);
+                }}
                 onBlur={(event) => {
                   if (!$root.current?.contains(event.relatedTarget as Node | null)) {
                     handleClose();

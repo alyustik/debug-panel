@@ -17,31 +17,25 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { type ReactNode,useCallback, useMemo } from 'react';
+import { type ReactNode, useCallback, useMemo } from 'react';
 
-import  { type DragHandleProps,type DragListInput } from '../../types';
+import { type DragHandleProps, type DragListInput } from '../../types';
 
 type Props = {
   input: DragListInput<unknown>;
   value: unknown[];
   setValue: (next: unknown[]) => void;
-}
+};
 
 type ItemProps = {
   id: string;
   render: (handle: DragHandleProps) => ReactNode;
-}
+};
 
 function SortableRow({ id, render }: ItemProps) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    setActivatorNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+  });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -65,22 +59,29 @@ export function DragList({ input, value, setValue }: Props) {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
 
-  const items = useMemo(() => value.map((item, idx) => ({
-      id: input.getItemKey ? input.getItemKey(item, idx) : String(idx),
-      data: item,
-      idx,
-    })), [value, input]);
+  const items = useMemo(
+    () =>
+      value.map((item, idx) => ({
+        id: input.getItemKey ? input.getItemKey(item, idx) : String(idx),
+        data: item,
+        idx,
+      })),
+    [value, input],
+  );
 
   const ids = useMemo(() => items.map((i) => i.id), [items]);
 
-  const handleDragEnd = useCallback((event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIndex = ids.indexOf(String(active.id));
-    const newIndex = ids.indexOf(String(over.id));
-    if (oldIndex === -1 || newIndex === -1) return;
-    setValue(arrayMove(value, oldIndex, newIndex));
-  }, [ids, value, setValue]);
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event;
+      if (!over || active.id === over.id) return;
+      const oldIndex = ids.indexOf(String(active.id));
+      const newIndex = ids.indexOf(String(over.id));
+      if (oldIndex === -1 || newIndex === -1) return;
+      setValue(arrayMove(value, oldIndex, newIndex));
+    },
+    [ids, value, setValue],
+  );
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

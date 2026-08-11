@@ -33,7 +33,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 120ms ease, background 120ms ease;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
   flex-shrink: 0;
 }
 
@@ -57,4 +59,3 @@
   font-weight: 400;
   font-family: var(--bdp-font);
 }
-

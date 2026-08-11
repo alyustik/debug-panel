@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 /* eslint-disable react/require-default-props */
 
@@ -21,7 +21,7 @@ export type PanelProps = {
   onCollapseChange?: (next: boolean) => void;
   children?: ReactNode;
   footer?: ReactNode;
-}
+};
 
 export function Panel({
   title = 'Controls',

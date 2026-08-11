@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import styles from './RecordingControls.module.scss';
 
@@ -57,22 +57,27 @@ export function useRecordingControls({
   onChangeFormat,
   onToggleRecording,
 }: UseRecordingControlsProps) {
-  useControls('Recording', () => ({
-    format: {
-      type: 'select',
-      label: 'Format',
-      layout: 'stacked',
-      rowClassName: styles.recordingFormatRow,
-      triggerClassName: styles.recordingFormatTrigger,
-      value: recordingFormat || defaultRecordingFormat,
-      options: recordingFormatOptions,
-      onChange: (value: unknown) => { onChangeFormat(String(value)); },
-    },
-    record: button(onToggleRecording, {
-      label: isRecording ? 'Stop Recording' : 'Record',
-      variant: isRecording ? 'primary' : 'secondary',
+  useControls(
+    'Recording',
+    () => ({
+      format: {
+        type: 'select',
+        label: 'Format',
+        layout: 'stacked',
+        rowClassName: styles.recordingFormatRow,
+        triggerClassName: styles.recordingFormatTrigger,
+        value: recordingFormat || defaultRecordingFormat,
+        options: recordingFormatOptions,
+        onChange: (value: unknown) => {
+          onChangeFormat(String(value));
+        },
+      },
+      record: button(onToggleRecording, {
+        label: isRecording ? 'Stop Recording' : 'Record',
+        variant: isRecording ? 'primary' : 'secondary',
+      }),
+      recordingStatus: custom(<RecordingStatus />, { render: () => isRecording }),
     }),
-    recordingStatus: custom(<RecordingStatus />, { render: () => isRecording }),
-  }), [recordingFormat, defaultRecordingFormat, recordingFormatOptions, isRecording, onChangeFormat, onToggleRecording]);
+    [recordingFormat, defaultRecordingFormat, recordingFormatOptions, isRecording, onChangeFormat, onToggleRecording],
+  );
 }
-

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import styles from './DragListControls.module.scss';
 
@@ -33,24 +33,28 @@ export function useDragListControls<T>({
   const mergedBodyClassName = bodyClassName ? `${styles.sectionBody} ${bodyClassName}` : styles.sectionBody;
   const mergedAddButtonClassName = addButtonClassName ? `${styles.addButton} ${addButtonClassName}` : styles.addButton;
 
-  useControls(sectionName, () => ({
-    items: dragList(items, {
-      label: '',
-      getItemKey,
-      renderItem,
-      onChange,
+  useControls(
+    sectionName,
+    () => ({
+      items: dragList(items, {
+        label: '',
+        getItemKey,
+        renderItem,
+        onChange,
+      }),
+      add: button(onAdd, {
+        label: addButtonLabel,
+        variant: 'ghost',
+        className: mergedAddButtonClassName,
+        content: (
+          <span className={styles.addButtonContent}>
+            <CloseIcon className={styles.addButtonIcon} />
+            <span>{addButtonLabel}</span>
+          </span>
+        ),
+      }),
     }),
-    add: button(onAdd, {
-      label: addButtonLabel,
-      variant: 'ghost',
-      className: mergedAddButtonClassName,
-      content: (
-        <span className={styles.addButtonContent}>
-          <CloseIcon className={styles.addButtonIcon} />
-          <span>{addButtonLabel}</span>
-        </span>
-      ),
-    }),
-  }), [items, getItemKey, renderItem, onChange, onAdd, addButtonLabel, mergedAddButtonClassName], { bodyClassName: mergedBodyClassName });
+    [items, getItemKey, renderItem, onChange, onAdd, addButtonLabel, mergedAddButtonClassName],
+    { bodyClassName: mergedBodyClassName },
+  );
 }
-

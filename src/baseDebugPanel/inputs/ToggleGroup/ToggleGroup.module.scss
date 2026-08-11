@@ -14,7 +14,10 @@
   @extend %font;
   padding: 6px 10px;
   cursor: pointer;
-  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  transition:
+    background 120ms ease,
+    color 120ms ease,
+    border-color 120ms ease;
 
   @media (hover: hover) {
     &:hover:not(:disabled):not(.active) {
@@ -41,4 +44,3 @@
   color: var(--bdp-bg);
   border-color: var(--bdp-fg-dim);
 }
-

@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
+import { useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 
 import { usePanelStore } from './context';
 import { parseSchema } from './parseSchema';
@@ -26,7 +26,7 @@ export function useControls<T = Record<string, any>>(
 
   const parsed = useMemo(() => {
     const raw = factoryRef.current;
-    const schema = (typeof raw === 'function' ? (raw as SchemaFactory)() : raw);
+    const schema = typeof raw === 'function' ? (raw as SchemaFactory)() : raw;
     return parseSchema(folderName, schema, {
       collapsed: collapsed ?? false,
       collapsible: collapsed !== undefined,
@@ -55,9 +55,12 @@ export function useControls<T = Record<string, any>>(
     prevSchemaValuesRef.current = { ...parsed.valueByPath };
   }, [parsed, store, folderName]);
 
-  useEffect(() => () => {
-    store.unregisterRoot(folderName);
-  }, [store, folderName]);
+  useEffect(
+    () => () => {
+      store.unregisterRoot(folderName);
+    },
+    [store, folderName],
+  );
 
   const allValues = useSyncExternalStore(
     store.subscribe,
@@ -76,17 +79,19 @@ export function useControls<T = Record<string, any>>(
     return out;
   }, [parsed, allValues]);
 
-  const setFn = useMemo(() => (next: Partial<T>) => {
-    const entries: Record<Path, unknown> = {};
-    Object.entries(next as Record<string, unknown>).forEach(([key, value]) => {
-      const path = parsed.inputPathByKey[key];
-      if (path !== undefined) {
-        entries[path] = value;
-      }
-    });
-    store.setMany(entries);
-  }, [parsed, store]);
+  const setFn = useMemo(
+    () => (next: Partial<T>) => {
+      const entries: Record<Path, unknown> = {};
+      Object.entries(next as Record<string, unknown>).forEach(([key, value]) => {
+        const path = parsed.inputPathByKey[key];
+        if (path !== undefined) {
+          entries[path] = value;
+        }
+      });
+      store.setMany(entries);
+    },
+    [parsed, store],
+  );
 
   return [valuesByKey as T, setFn];
 }
-

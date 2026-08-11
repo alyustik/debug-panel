@@ -1,20 +1,23 @@
 import styles from './Checkbox.module.scss';
 
-import { type ChangeEvent,useCallback } from 'react';
+import { type ChangeEvent, useCallback } from 'react';
 
-import  { type BooleanInput } from '../../types';
+import { type BooleanInput } from '../../types';
 
 type Props = {
   input: BooleanInput;
   value: boolean;
   setValue: (v: boolean) => void;
   disabled?: boolean;
-}
+};
 
 export function Checkbox({ input, value, setValue, disabled = false }: Props) {
-  const handle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.checked);
-  }, [setValue]);
+  const handle = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.checked);
+    },
+    [setValue],
+  );
   const label = input.label ?? '';
   const hint = input.hint ?? '';
 

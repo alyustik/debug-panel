@@ -1,6 +1,6 @@
 import styles from './Row.module.scss';
 
-import  { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 type Props = {
   label: string;
@@ -10,7 +10,7 @@ type Props = {
   rowClassName?: string;
   labelClassName?: string;
   controlClassName?: string;
-}
+};
 
 export function Row({
   label,

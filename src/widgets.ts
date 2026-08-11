@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 export type { UseDragListControlsProps } from './debugPanelWidgets/DragListControls/useDragListControls';
 export { useDragListControls } from './debugPanelWidgets/DragListControls/useDragListControls';

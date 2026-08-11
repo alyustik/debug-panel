@@ -1,11 +1,11 @@
 import styles from './Button.module.scss';
 
-import  { type ButtonInput } from '../../types';
+import { type ButtonInput } from '../../types';
 
 type Props = {
   input: ButtonInput;
   label: string;
-}
+};
 
 export function Button({ input, label }: Props) {
   const variant = input.variant ?? 'secondary';

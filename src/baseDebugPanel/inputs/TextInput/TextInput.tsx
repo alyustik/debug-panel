@@ -1,20 +1,23 @@
 import styles from './TextInput.module.scss';
 
-import { type ChangeEvent,useCallback } from 'react';
+import { type ChangeEvent, useCallback } from 'react';
 
-import  { type StringInput } from '../../types';
+import { type StringInput } from '../../types';
 
 type Props = {
   input: StringInput;
   value: string;
   setValue: (v: string) => void;
   disabled?: boolean;
-}
+};
 
 export function TextInput({ input, value, setValue, disabled = false }: Props) {
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setValue(e.target.value);
-  }, [setValue]);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setValue(e.target.value);
+    },
+    [setValue],
+  );
 
   if (input.rows && input.rows > 1) {
     return (

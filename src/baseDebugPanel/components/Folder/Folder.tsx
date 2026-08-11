@@ -1,6 +1,6 @@
 import styles from './Folder.module.scss';
 
-import { type ReactNode,useCallback } from 'react';
+import { type ReactNode, useCallback } from 'react';
 
 import { usePanelStore } from '../../context';
 import { Expandable } from '../Expandable';
@@ -15,7 +15,7 @@ type Props = {
   children: ReactNode;
   className?: string;
   bodyClassName?: string;
-}
+};
 
 export function Folder({
   path,
@@ -40,16 +40,9 @@ export function Folder({
     const sectionBodyClassName = bodyClassName ? `${styles.body} ${bodyClassName}` : styles.body;
     return (
       <section className={sectionClassName}>
-        <button
-          type="button"
-          className={styles.sectionHeader}
-          disabled={!collapsible}
-          onClick={handleToggle}
-        >
+        <button type="button" className={styles.sectionHeader} disabled={!collapsible} onClick={handleToggle}>
           <span className={styles.sectionTitle}>{label}</span>
-          {collapsible ? (
-            <ChevronIcon className={`${styles.chevron} ${collapsed ? styles.collapsed : ''}`} />
-          ) : null}
+          {collapsible ? <ChevronIcon className={`${styles.chevron} ${collapsed ? styles.collapsed : ''}`} /> : null}
         </button>
         <Expandable show={isOpen}>
           <div className={sectionBodyClassName}>{children}</div>
@@ -62,16 +55,9 @@ export function Folder({
   const subfolderBodyClassName = bodyClassName ? `${styles.subBody} ${bodyClassName}` : styles.subBody;
   return (
     <div className={subfolderClassName}>
-      <button
-        type="button"
-        className={styles.subHeader}
-        disabled={!collapsible}
-        onClick={handleToggle}
-      >
+      <button type="button" className={styles.subHeader} disabled={!collapsible} onClick={handleToggle}>
         <span className={styles.subTitle}>{label}</span>
-        {collapsible ? (
-          <ChevronIcon className={`${styles.chevron} ${collapsed ? styles.collapsed : ''}`} />
-        ) : null}
+        {collapsible ? <ChevronIcon className={`${styles.chevron} ${collapsed ? styles.collapsed : ''}`} /> : null}
       </button>
       <Expandable show={isOpen}>
         <div className={subfolderBodyClassName}>{children}</div>
