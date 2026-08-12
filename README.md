@@ -4,9 +4,8 @@ Reusable React debug panel controls.
 
 ## Disclaimer
 
-This package is fully vibe-coded and primarily built for internal experiments.
-The API may change without notice, edge cases may be missing, and no support or
-stability guarantees are provided. Use it at your own risk.
+This package is fully vibe-coded and primarily built for internal experiments. The API may change without notice, edge
+cases may be missing, and no support or stability guarantees are provided. Use it at your own risk.
 
 ## Development
 
@@ -18,7 +17,6 @@ pnpm check
 ## Usage
 
 ```tsx
-import '@alyustik/debug-panel/styles.css';
 import { Panel, useControls } from '@alyustik/debug-panel';
 
 function DebugControls() {
@@ -35,5 +33,7 @@ function DebugControls() {
   );
 }
 ```
+
+Styles are loaded automatically with the package entry.
 
 Reusable widgets are exported from `@alyustik/debug-panel/widgets`.

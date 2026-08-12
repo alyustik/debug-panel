@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import dts from 'vite-plugin-dts';
 
 const externalPackages = [
@@ -12,8 +12,22 @@ const externalPackages = [
   'zustand',
 ];
 
+function injectStyles(): Plugin {
+  return {
+    name: 'inject-library-styles',
+    renderChunk(code: string, chunk: { isEntry: boolean }) {
+      if (!chunk.isEntry) return null;
+      return {
+        code: `'use client';\nimport './styles.css';\n${code}`,
+        map: null,
+      };
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
+    injectStyles(),
     dts({
       entryRoot: 'src',
       include: ['src'],
