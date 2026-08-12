@@ -2,6 +2,12 @@
 
 Reusable React debug panel controls.
 
+## Disclaimer
+
+This package is fully vibe-coded and primarily built for internal experiments.
+The API may change without notice, edge cases may be missing, and no support or
+stability guarantees are provided. Use it at your own risk.
+
 ## Development
 
 ```powershell
