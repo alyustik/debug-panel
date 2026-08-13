@@ -1,0 +1,57 @@
+@use '../../theme/tools' as *;
+
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.colorInput {
+  width: 32px;
+  height: 28px;
+  flex: 0 0 auto;
+  padding: 2px;
+  background: var(--bdp-input-bg);
+  border: 1px solid var(--bdp-border);
+  cursor: pointer;
+  outline: none;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch,
+  &::-moz-color-swatch {
+    border: none;
+  }
+
+  &:focus {
+    border-color: var(--bdp-fg-dim);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+}
+
+.hexInput {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 10px;
+  background: var(--bdp-input-bg);
+  border: 1px solid var(--bdp-border);
+  color: var(--bdp-fg);
+  @extend %font;
+  outline: none;
+
+  &:focus {
+    border-color: var(--bdp-fg-dim);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+}

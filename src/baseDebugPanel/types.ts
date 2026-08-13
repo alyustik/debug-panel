@@ -50,6 +50,12 @@ export type StringInput = {
   onChange?: (value: string) => void;
 } & BaseInputCommon;
 
+export type ColorInput = {
+  type: 'color';
+  value: string;
+  onChange?: (value: string) => void;
+} & BaseInputCommon;
+
 export type SelectInput<T = unknown> = {
   type: 'select';
   value: T;
@@ -88,7 +94,15 @@ export type DragListInput<T = string> = {
 } & BaseInputCommon;
 
 export type Input =
-  NumberInput | BooleanInput | StringInput | SelectInput | ToggleGroupInput | ButtonInput | CustomInput | DragListInput;
+  | NumberInput
+  | BooleanInput
+  | StringInput
+  | ColorInput
+  | SelectInput
+  | ToggleGroupInput
+  | ButtonInput
+  | CustomInput
+  | DragListInput;
 
 export type FolderOptions = {
   collapsed?: boolean;
@@ -118,7 +132,7 @@ export type SchemaValue =
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Schema = Record<string, any>;
 
-export type SchemaFactory = () => Schema;
+export type SchemaFactory<S extends Schema = Schema> = () => S;
 
 export type NormalizedInputNode = {
   kind: 'input';
@@ -144,6 +158,10 @@ export type NormalizedFolderNode = {
 
 export type Node = NormalizedInputNode | NormalizedFolderNode;
 
+type WidenValue<V> = V extends number ? number : V extends boolean ? boolean : V extends string ? string : V;
+
+type OptionValue<O> = O extends Record<string, infer V> ? V : O extends readonly (infer V)[] ? V : never;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ValuesOf<S = Record<string, any>> =
   S extends Record<string, unknown>
@@ -154,20 +172,10 @@ export type ValuesOf<S = Record<string, any>> =
             ? boolean
             : S[K] extends string
               ? string
-              : S[K] extends NumberInput
-                ? number
-                : S[K] extends BooleanInput
-                  ? boolean
-                  : S[K] extends StringInput
-                    ? string
-                    : S[K] extends SelectInput<infer V>
-                      ? V
-                      : S[K] extends ToggleGroupInput<infer V>
-                        ? V
-                        : S[K] extends CustomInput
-                          ? unknown
-                          : S[K] extends DragListInput<infer V>
-                            ? V[]
-                            : unknown;
+              : S[K] extends { options: infer O }
+                ? OptionValue<O>
+                : S[K] extends { value: infer V }
+                  ? WidenValue<V>
+                  : unknown;
       }
     : never;

@@ -1,5 +1,6 @@
 import {
   type ButtonInput,
+  type ColorInput,
   type CustomInput,
   type DragListInput,
   type FolderInput,
@@ -10,6 +11,10 @@ import {
 
 export function button(onClick: () => void, opts?: Omit<ButtonInput, 'type' | 'onClick'>): ButtonInput {
   return { type: 'button', onClick, ...opts };
+}
+
+export function color(value: string, opts?: Omit<ColorInput, 'type' | 'value'>) {
+  return { type: 'color', value, ...opts } satisfies ColorInput;
 }
 
 export function custom(content: CustomInput['content'], opts?: Omit<CustomInput, 'type' | 'content'>): CustomInput {

@@ -3,6 +3,7 @@ import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { usePanelStore } from '../../context';
 import { Button } from '../../inputs/Button';
 import { Checkbox } from '../../inputs/Checkbox';
+import { ColorInput } from '../../inputs/ColorInput';
 import { DragList } from '../../inputs/DragList';
 import { Select } from '../../inputs/Select';
 import { Slider } from '../../inputs/Slider';
@@ -98,6 +99,9 @@ function InputRow({ node }: InputRowProps) {
           disabled={disabled}
         />
       );
+      break;
+    case 'color':
+      control = <ColorInput value={value as string} setValue={setValue as (v: string) => void} disabled={disabled} />;
       break;
     case 'select':
       control = <Select input={input} value={value} setValue={setValue} disabled={disabled} />;

@@ -1,4 +1,4 @@
-﻿# @alyustik/debug-panel
+# @alyustik/debug-panel
 
 Reusable React debug panel controls.
 
@@ -17,18 +17,20 @@ pnpm check
 ## Usage
 
 ```tsx
-import { Panel, useControls } from '@alyustik/debug-panel';
+import { color, Panel, useControls } from '@alyustik/debug-panel';
 
 function DebugControls() {
   const [values] = useControls('Scene', {
     speed: { value: 1, min: 0, max: 5, step: 0.1 },
     enabled: true,
+    background: color('#121212', { label: 'Background' }),
   });
 
   return (
     <>
       <Panel title="Controls" />
       <div>{values.speed}</div>
+      <div style={{ color: values.background }}>Preview</div>
     </>
   );
 }

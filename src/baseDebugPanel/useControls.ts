@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 
 import { usePanelStore } from './context';
 import { parseSchema } from './parseSchema';
-import { type Path, type Schema, type SchemaFactory } from './types';
+import { type Path, type Schema, type ValuesOf } from './types';
 
 export type UseControlsOptions = {
   collapsed?: boolean;
@@ -10,13 +10,12 @@ export type UseControlsOptions = {
   bodyClassName?: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useControls<T = Record<string, any>>(
+export function useControls<const S extends Schema>(
   folderName: string,
-  schemaOrFactory: Schema | SchemaFactory,
+  schemaOrFactory: S | (() => S),
   deps: readonly unknown[] = [],
   options?: UseControlsOptions,
-): [T, (next: Partial<T>) => void] {
+) {
   const store = usePanelStore();
   const factoryRef = useRef(schemaOrFactory);
   factoryRef.current = schemaOrFactory;
@@ -26,7 +25,7 @@ export function useControls<T = Record<string, any>>(
 
   const parsed = useMemo(() => {
     const raw = factoryRef.current;
-    const schema = typeof raw === 'function' ? (raw as SchemaFactory)() : raw;
+    const schema = typeof raw === 'function' ? raw() : raw;
     return parseSchema(folderName, schema, {
       collapsed: collapsed ?? false,
       collapsible: collapsed !== undefined,
@@ -73,14 +72,16 @@ export function useControls<T = Record<string, any>>(
     parsed.inputKeys.forEach((key) => {
       const path = parsed.inputPathByKey[key];
       if (path !== undefined) {
-        out[key] = allValues[path];
+        out[key] = Object.prototype.hasOwnProperty.call(allValues, path)
+          ? allValues[path]
+          : parsed.valueByPath[path];
       }
     });
     return out;
   }, [parsed, allValues]);
 
   const setFn = useMemo(
-    () => (next: Partial<T>) => {
+    () => (next: Partial<ValuesOf<S>>) => {
       const entries: Record<Path, unknown> = {};
       Object.entries(next as Record<string, unknown>).forEach(([key, value]) => {
         const path = parsed.inputPathByKey[key];
@@ -93,5 +94,5 @@ export function useControls<T = Record<string, any>>(
     [parsed, store],
   );
 
-  return [valuesByKey as T, setFn];
+  return [valuesByKey as ValuesOf<S>, setFn] as [ValuesOf<S>, typeof setFn];
 }
